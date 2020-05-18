@@ -2,38 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mt"%>
-<mt:app title="Send">
+<mt:app title="Gửi thông báo">
     <jsp:attribute name="content">
     <main>
-<!--        <div class="container">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <td>Id</td>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Phone number</td>
-                            <td>State</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Cong Nguyen</td>
-                            <td>congnx@gmail.com</td>
-                            <td>091681468</td>
-                            <td>Chua tra</td>
-                            <td><a class="btn btn-info">Send email</a><a class="btn btn-warning" href="sendnotification.jsp">Cancel</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                   <textarea rows="4" cols="100"></textarea>
-                </div>
-             </div>
-        </div>-->
         <br>
         <section class="page-section" id="contact">
             <div class="container">
@@ -41,7 +12,7 @@
                     <h2 class="section-heading text-uppercase">Send email to: ${customer.getName().toString()}</h2>
                 </div>
                 <br>
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <form id="contactForm" action="" novalidate="novalidate" method="post" data-url="<c:url value="/customer/send" />">
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -78,10 +49,17 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            Nội dung Email
+                            <input class="form-control" type="text" name="subject" placeholder="Nhập tiêu đề">
+                            <div class="form-group">
+                                <font color="#F24638" id="subject-error"></font>
+                            </div>
+                            <div>Nội dung Email</div>
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea rows="15" class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Hãy nhập nội dung mail"></textarea>
+                                <textarea rows="15" class="form-control" name="content" placeholder="Hãy nhập nội dung mail" required="required" data-validation-required-message="Hãy nhập nội dung mail"></textarea>
                                 <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <font color="#F24638" id="content-error"></font>
                             </div>
                         </div>
                     </div>
@@ -93,6 +71,58 @@
             </div>
         </section>
     </main>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#contactForm').submit(function(event) {
+                event.preventDefault();
+                var url = $(this).data('url');
+                $('#subject-error').text('');
+                $('#content-error').text('');
+                var subject = $('#contactForm input[name=subject]').val();
+                var content = $('#contactForm textarea[name=content]').val();
+                if (subject == '') {
+                    $('#subject-error').text('Nhập tiêu đề');
+                }
+                if (content == '') {
+                    $('#content-error').text('Nhập nội dung');
+                }
+                if (subject != '' && content != '') {
+                    $.ajax({
+                        type: 'post',
+                        url: url,
+                        data: {
+                            subject: subject, 
+                            content: content,
+                        },
+                        success: function(response) {
+                            if (response.url) { 
+                                Swal.fire({
+                                    title: 'Gửi thành công',
+                                    width: 600,
+                                    padding: '3em',
+                                    background: '#fff url(/images/trees.png)',
+                                    backdrop: `
+                                      rgba(0,0,123,0.4)
+                                      url("/images/nyan-cat.gif")
+                                      left top
+                                      no-repeat
+                                    `
+                                });
+                                window.location = response.url;
+                            }
+                            if (response.error) {
+                                Swal.fire({
+                                    title: 'Gửi mail thất bại, thử lại sau',
+                                    icon: 'error',
+                                });
+                                window.location.replace(response.url); 
+                            }
+                        },
+                    });
+                }
+            });
+        });
+    </script>
     </jsp:attribute>
 </mt:app>
             

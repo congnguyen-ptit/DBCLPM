@@ -16,4 +16,6 @@ public interface CustomerDAO {
     public Customer getCustomer(int id);
     public ArrayList<Customer> getAllCustomers();
     public ArrayList<Customer> getCustomersByName(String name);
+    public ArrayList<Customer> getCustomersNotPay();
+    public ArrayList<Customer> getCustomersPaid();
 }

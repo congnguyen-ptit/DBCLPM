@@ -25,11 +25,28 @@ public class Customer implements Serializable{
     private String phone_number;
     private int stage;
     private ArrayList<Location> location;
-
+    private ArrayList<Invoice> invoice;
+    private ArrayList<PoweMeter> meters;
     public Customer(){
         
     }
 
+    public ArrayList<PoweMeter> getMeters() {
+        return meters;
+    }
+
+    public void setMeters(ArrayList<PoweMeter> meters) {
+        this.meters = meters;
+    }
+
+    public ArrayList<Invoice> getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(ArrayList<Invoice> invoice) {
+        this.invoice = invoice;
+    }
+    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

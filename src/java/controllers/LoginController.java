@@ -10,6 +10,8 @@ import dao.implement.AccountImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Account;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -27,13 +31,13 @@ import models.Account;
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private AccountDAO accountDAO = new AccountImpl();
+    private HttpSession httpSession;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession httpSession = request.getSession();
+        httpSession = request.getSession();
         if (httpSession.getAttribute("user") != null) {
-            System.out.println(" dcu");
             response.sendRedirect(request.getContextPath() + "/admin/home");
         } else {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -43,6 +47,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String error = "";
@@ -56,11 +61,23 @@ public class LoginController extends HttpServlet {
             HttpSession httpSession = request.getSession();
             Account account = accountDAO.getAccount(username);
             httpSession.setAttribute("user", account.getName().toString());
-            response.sendRedirect(request.getContextPath() + "/admin/home");
+            JSONObject url = new JSONObject();
+            String redirect = request.getContextPath() + "/admin/home";
+            try {
+                url.put("url", redirect);
+                response.getWriter().write(url.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             error = "Sai tên đăng nhập hoặc mật khẩu!!!";
-            request.setAttribute("msg", error );
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            JSONObject errOb = new JSONObject();
+            try {
+                errOb.put("error", error);
+                response.getWriter().write(errOb.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

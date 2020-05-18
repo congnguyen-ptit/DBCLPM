@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mt"%>
-<mt:app title="Send Notification">
+<mt:app title="Gửi thông báo">
     <jsp:attribute name="content">
     <main>
         <div class="container-fluid">
@@ -11,19 +11,18 @@
                     <thead class="thead-dark">
                         <tr>
                             <td>#</td>
-                            <td>Id</td>
-                            <td>Name</td>
+                            <td>Họ tên</td>
                             <td>Email</td>
-                            <td>Phone number</td>
-                            <td>State</td>
-                            <td>Location</td>
+                            <td>Số điện thoại</td>
+                            <td>Trạng thái</td>
+                            <td>Địa chỉ</td>
+                            <td>Hành động</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listCustomers}" var="customer">
+                        <c:forEach items="${listCustomers}" var="customer" varStatus="loop">
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td>${customer.getId()}</td>
+                            <td>${loop.index + 1}</td>
                             <td>${customer.getName().toString()}</td>
                             <td>${customer.getEmail()}</td>
                             <td>${customer.getPhone_number()}</td>
@@ -49,7 +48,7 @@
                     </tbody>
                 </table>
              </div>
-            <div><a class="btn btn-info" href="sendalll.jsp">Send All</a></div>
+            <div><a class="btn btn-info" href="<c:url value="/customers/send-all" />">Send All</a></div>
         </div>
     </main>
     </jsp:attribute>

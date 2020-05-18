@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Customer;
 import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,11 +25,21 @@ import java.util.ArrayList;
 @WebServlet(urlPatterns = {"/customers/list"})
 public class ShowListSendEmailController extends HttpServlet {
     private CustomerDAO cDAO= new CustomerImpl();
+    private HttpSession httpSession;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Customer> listCustomers = cDAO.getAllCustomers();
-        request.setAttribute("listCustomers", listCustomers);
-        request.getRequestDispatcher("/sendnotification.jsp").forward(request, response);
+        httpSession = request.getSession();
+        String error = "";
+        if (httpSession.getAttribute("user") != null) {
+            ArrayList<Customer> listCustomers = cDAO.getAllCustomers();
+            request.setAttribute("listCustomers", listCustomers);
+            request.getRequestDispatcher("/sendnotification.jsp").forward(request, response);
+        } 
+        else {
+            error = "Bạn phải đăng nhập trước!";
+            request.setAttribute("error", error);
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+        }
     }
 }

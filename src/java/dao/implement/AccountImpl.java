@@ -18,6 +18,7 @@ import models.Location;
 import models.Name;
 import models.Role;
 import java.util.ArrayList;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -64,14 +65,13 @@ public class AccountImpl implements AccountDAO{
     public boolean checkLogin(String username, String password) {
         Connection conn = DBConnect.getDBConnection();
         boolean check = false;
-        String sql = "select * from accounts where username=? and password=?";
+        String sql = "select * from accounts where username=?";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
-            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                check = true;
+                check = BCrypt.checkpw(password, rs.getString("password"));
             }
             return check;
         }catch(SQLException e){

@@ -5,7 +5,7 @@
     <meta http-equiv="refresh" content="0;url=dist/index.html">
     <title>Admin</title>
     <script language="javascript">
-        window.location.href = "login.jsp"
+        window.location.href = "/SQA/login"
     </script>
 </head>
 <body>
