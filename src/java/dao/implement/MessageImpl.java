@@ -22,18 +22,21 @@ import models.Messag;
 public class MessageImpl implements MessageDAO {
 
     @Override
-    public void storeMessage(Messag message) {
+    public boolean storeMessage(Messag message) {
         Connection conn = DBConnect.getDBConnection();
         String sql = "insert into messages(customer_id, content, created_at) values (?,?,GETDATE())";
+        boolean stored = false;
         try {
             PreparedStatement ps = conn.prepareCall(sql);
             ps.setLong(1, message.getCustomer().getId());
             ps.setString(2, message.getContent());
             ps.executeUpdate();
+            stored = true;
         } catch(SQLException e) {
             e.printStackTrace();
             DBConnect.dbClose();
         }
         DBConnect.dbClose();
+        return stored;
     }
 }

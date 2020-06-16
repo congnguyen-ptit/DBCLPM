@@ -7,7 +7,7 @@
     <main>
         <br>
         <section class="page-section" id="contact">
-            <div class="container">
+            <div class="container" style="background-color: white;">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Send email to: ${customer.getName().toString()}</h2>
                 </div>
@@ -24,12 +24,12 @@
                                 <input class="form-control" id="email" placeholder="${customer.getEmail()}" disabled />
                             </div>
                             <div class="form-group mb-md-0">
-                                Phone number
+                                Số điện thoại
                                 <input class="form-control" id="phone" placeholder="${customer.getPhone_number()}" disabled />
                             </div>
                             <br>
                             <div class="form-group mb-md-0">
-                                Location
+                                Địa chỉ
                                 <c:forEach items="${customer.getLocation()}" var="location" >
                                     <input class="form-control" id="phone" placeholder="${location.toString()}" disabled />
                                 </c:forEach>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="text-center">
                         <div id="success"></div>
-                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Send Message</button>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Gửi</button>
                     </div>
                 </form>
             </div>

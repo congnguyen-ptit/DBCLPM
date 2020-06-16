@@ -23,6 +23,7 @@ public class Customer implements Serializable{
     private Name name;
     private String email;
     private String phone_number;
+    private String identityNumber;
     private int stage;
     private ArrayList<Location> location;
     private ArrayList<Invoice> invoice;
@@ -31,6 +32,14 @@ public class Customer implements Serializable{
         
     }
 
+    public String getIdentityNumber() {
+        return identityNumber;
+    }
+
+    public void setIdentityNumber(String identityNumber) {
+        this.identityNumber = identityNumber;
+    }
+    
     public ArrayList<PoweMeter> getMeters() {
         return meters;
     }

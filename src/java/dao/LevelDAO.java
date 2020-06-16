@@ -14,4 +14,6 @@ import java.util.ArrayList;
 public interface LevelDAO {
     public Level getLevel(int id);
     public ArrayList<Level> getLevels(int id);
+    public ArrayList<Level> getAll();
+    public boolean updateLevel(Level level);
 }

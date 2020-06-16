@@ -5,19 +5,44 @@
 <mt:app title="${tit}">
     <jsp:attribute name="content">
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: white;">
             <br/>
-            <div class="row">
-                <div class="col-3">
-                    Từ ngày <input type="date" id="start_date" name="start_date">
-                </div>
-                <div class="col-3">
-                    Đến ngày<input type="date" id="end_date" name="end_date">
-                </div>
-                <div class="col-4">
-                    <input type="submit" id="filter" name="filter" value="Lọc">
-                </div>
-            </div>
+                <c:if test="${notPay == true}">
+                    <form action="<c:url value="/customers/not-pay"/>" method="post">
+                        <div class="row">
+                            <div class="col-2">
+                                Tháng
+                                <select name="time">
+                                    <option value="0">All</option>
+                                    <c:forEach items="${listTime}" var="time">
+                                        <option value="${time.getId()}">${time.getName()}</option>
+                                    </c:forEach> 
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="submit" value="Lọc">
+                            </div>
+                        </div>
+                    </form>
+                </c:if>
+                <c:if test="${notPay != true}">
+                        <form action="<c:url value="/customers/paid"/>" method="post">
+                        <div class="row">
+                            <div class="col-2">
+                                Tháng
+                                <select name="time">
+                                    <option value="0">All</option>
+                                    <c:forEach items="${listTime}" var="time">
+                                        <option value="${time.getId()}">${time.getName()}</option>
+                                    </c:forEach> 
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="submit" value="Lọc">
+                            </div>
+                        </div>
+                    </form>
+                </c:if>
             <br/>
             <div class="table-responsive">
                 <table class="table">
@@ -36,10 +61,10 @@
                         <c:forEach items="${listCustomers}" var="customer" varStatus="loop">
                         <tr>
                             <td>${loop.index + 1}</td>
-                            <td>${customer.getName().toString()}</td>
-                            <td>${customer.getEmail()}</td>
-                            <td>${customer.getPhone_number()}</td>
-                            <td>
+                            <td class="tbName">${customer.getName().toString()}</td>
+                            <td class="tbEmail">${customer.getEmail()}</td>
+                            <td class="tbPhone">${customer.getPhone_number()}</td>
+                            <td class="tbStage">
                                 <c:if test="${customer.getStage() == 0}">
                                     Chưa thanh toán
                                 </c:if>
@@ -50,12 +75,12 @@
                                     Đang nợ
                                 </c:if>
                             </td>
-                            <td>
+                            <td class="tbLocation">
                                 <c:forEach items="${customer.getLocation()}" var="location">
                                     ${location.toString()}
                                 </c:forEach>
                             </td>
-                            <td><a class="btn btn-info" href="<c:url value="/customer/send?id=${customer.getId()}" />">Send email</a></td>
+                            <td><a class="btn btn-info" href="<c:url value="/customer/send?id=${customer.getId()}" />">Gửi email</a></td>
                         </tr>
                         </c:forEach>
                     </tbody>
@@ -95,6 +120,7 @@
                 });  
             });   
         });
+        
     </script>
     </jsp:attribute>
 </mt:app>

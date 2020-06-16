@@ -8,11 +8,11 @@
         <div class="container-fluid">
             <div class="text-center" style="margin-top: 100px;">
                 <ul style="list-style: none">
-                    <li ><a class="btn btn-info" href="<c:url value="/customers/list" /> ">Gửi thông báo qua email</a></li>
-                    <li style="margin-top: 20px"><a class="btn btn-info" href="<c:url value="/customers/paid" />">Đã đóng tiền</a></li>
-                    <li style="margin-top: 20px"><a class="btn btn-info" href="<c:url value="/customers/not-pay" />">Chưa đóng tiền</a></li>
-                    <li style="margin-top: 20px"><a class="btn btn-info" href="<c:url value="/export-report" />">Xuất báo cáo</a> </li>
-                    <li style="margin-top: 20px"><a class="btn btn-info" href="./config.jsp">Cấu hình hệ thống</a> </li>
+                    <li ><a class="btn btn-info home" href="<c:url value="/customers/list" /> ">Gửi thông báo qua email</a></li>
+                    <li style="margin-top: 20px"><a class="btn btn-info home" href="<c:url value="/customers/paid" />">Đã đóng tiền</a></li>
+                    <li style="margin-top: 20px"><a class="btn btn-info home" href="<c:url value="/customers/not-pay" />">Chưa đóng tiền</a></li>
+                    <li style="margin-top: 20px"><a class="btn btn-info home" href="<c:url value="/export-report" />">Xuất báo cáo</a> </li>
+                    <li style="margin-top: 20px"><a class="btn btn-info home" href="<c:url value="/config" />">Cấu hình hệ thống</a> </li>
                 </ul>
             </div>
         </div>

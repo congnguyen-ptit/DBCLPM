@@ -32,7 +32,7 @@ public class Search extends HttpServlet {
         else {
             error = "Bạn phải đăng nhập trước!";
             request.setAttribute("error", error);
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
         }
     }
     @Override

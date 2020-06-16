@@ -15,14 +15,16 @@ import dao.implement.LevelImpl;
 import dao.implement.MessageImpl;
 import dao.implement.PowerMeterImpl;
 import dao.implement.TimImpl;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import models.Account;
 import models.Customer;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import models.Invoice;
 import models.Level;
@@ -53,7 +55,7 @@ public class test {
 //            System.out.println(account.getLocation().get(i).getWard());
 //        }
         
-        CustomerDAO cDAO = new CustomerImpl();
+//        CustomerDAO cDAO = new CustomerImpl();
 //        ArrayList<Customer> list = cDAO.getAllCustomers();
 //        for(int i = 0; i<list.size();i++){
 //            System.out.println(list.get(i).getName().getFirst_name());
@@ -77,8 +79,6 @@ public class test {
 //        boolean valuate = BCrypt.checkpw(pas, account.getPassword());
 //        System.out.println(valuate);
 //        //$2a$10$/5ijjWN.5viyhstpJcfkpuhWo7H5Uzf.fFJnZpX7B3K1/7uoQvQC.
-           ArrayList<Customer> list = cDAO.getCustomersNotPay();
-           System.out.println(list.size());
 //        TimDAO tDAO = new TimImpl();
 //        Tim time = tDAO.getTime(1);
 //        System.out.println(time.getName());
@@ -99,16 +99,35 @@ public class test {
 //        for(int i = 0;i<listInvoice.size();i++){
 //            System.out.println(listInvoice.get(i).getId());
 //        }
-          Customer c = cDAO.getCustomer(5);
-          System.out.println(c.getMeters().size());
-//          MailUtil.sendMail("congnx1998521@yahoo.com.vn", "thong bao", "Test");
-          String m1 = "abc@gmail.com";
-          String m2 = "asbd@gmail.com";
-          String m3 = "asbd@gmail.com";
-          String[] m = new String[3];
-          m[0] = "asda@gmail.com";
-          m[1] = "asd@gmail.com";
-          m[2] = "congnx1998521@gmail.com";
-          MailUtil.sendMail(m, "hello" , "content");
+//          Customer c = cDAO.getCustomer(5);
+//          System.out.println(c.getMeters().size());
+////          MailUtil.sendMail("congnx1998521@yahoo.com.vn", "thong bao", "Test");
+//          String m1 = "abc@gmail.com";
+//          String m2 = "asbd@gmail.com";
+//          String m3 = "asbd@gmail.com";
+//          String[] m = new String[3];
+//          m[0] = "asda@gmail.com";
+//          m[1] = "asd@gmail.com";
+//          m[2] = "congnx1998521@gmail.com";
+//          MailUtil.sendMail(m, "hello" , "content");
+//            PowerMeterDAO pDAO = new PowerMeterImpl();
+//            ArrayList<PoweMeter> listmeter = new ArrayList<>();
+// 
+//            
+//            listmeter = pDAO.getFromTo("2020-01-01","2020-03-01" , 0);
+//      
+//            System.out.println(listmeter.size());
+//            PoweMeter pm = pDAO.getMeter(4);
+//            System.out.println(pm.getCustomer().getName().toString());
+//            System.out.println(pm.getNew_index() - pm.getOld_index() + 1);
+//            System.out.println(pm.getAmount());
+//            double amount = 50*1678 + 50*1734;
+//            System.out.println(amount);
+//              LevelDAO lDAO = new LevelImpl();
+//              Level l = lDAO.getLevel(1);
+//              l.setPrice(1678);
+//              lDAO.updateLevel(l);
+                
     }
+   
 }

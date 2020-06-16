@@ -6,11 +6,13 @@
 package dao;
 
 import models.Tim;
-
+import java.util.ArrayList;
 /**
  *
  * @author CongNguyen
  */
 public interface TimDAO {
     public Tim getTime(int id);
+    public ArrayList<Tim> getAll(int id);
+    public ArrayList<Tim> getAllTimes();
 }

@@ -41,6 +41,7 @@ public class CustomerImpl implements CustomerDAO{
                 customer.setEmail(rs.getString("email"));
                 customer.setPhone_number(rs.getString("phone_number"));
                 customer.setStage(rs.getInt("stage"));
+                customer.setIdentityNumber(rs.getString("identification_number"));
                 NameDAO nameimp = new NameImpl();
                 Name name = nameimp.getName(rs.getInt("name_id"));
                 customer.setName(name);
@@ -76,6 +77,7 @@ public class CustomerImpl implements CustomerDAO{
                 customer.setEmail(rs.getString("email"));
                 customer.setPhone_number(rs.getString("phone_number"));
                 customer.setStage(rs.getInt("stage"));
+                customer.setIdentityNumber(rs.getString("identification_number"));
                 NameDAO nameimp = new NameImpl();
                 Name name = nameimp.getName(rs.getInt("name_id"));
                 customer.setName(name);
@@ -107,6 +109,7 @@ public class CustomerImpl implements CustomerDAO{
                 customer.setId(rs.getInt("id"));
                 customer.setEmail(rs.getString("email"));
                 customer.setPhone_number(rs.getString("phone_number"));
+                customer.setIdentityNumber(rs.getString("identification_number"));
                 customer.setStage(rs.getInt("stage"));
                 Name n = new Name();
                 n.setFirst_name(rs.getString("first_name"));
@@ -127,12 +130,13 @@ public class CustomerImpl implements CustomerDAO{
     }
 
     @Override
-    public ArrayList<Customer> getCustomersNotPay() {
+    public ArrayList<Customer> getCustomersState(int stage) {
         Connection conn = DBConnect.getDBConnection();
-        String sql = "select * from customers inner join names on customers.name_id = names.id where stage = 0"; 
+        String sql = "select * from customers inner join names on customers.name_id = names.id where stage = ?"; 
         ArrayList<Customer> listcustomer = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, stage);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Customer customer = new Customer();
@@ -159,34 +163,37 @@ public class CustomerImpl implements CustomerDAO{
     }
 
     @Override
-    public ArrayList<Customer> getCustomersPaid() {
+    public ArrayList<Customer> getCustomerByState(int time_id, int state) {
         Connection conn = DBConnect.getDBConnection();
-        String sql = "select * from customers inner join names on customers.name_id = names.id where stage = 1"; 
-        ArrayList<Customer> listcustomer = new ArrayList<>();
+        String sql = "select customers.* from customers join power_meters on customers.id = power_meters.customer_id "
+                + "join time on time.id = power_meters.time_id where time.id = ? and customers.stage = ?;";
         try{
-            PreparedStatement ps = conn.prepareCall(sql);;
+            ArrayList<Customer> listCustomers = new ArrayList<>();
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setInt(1, time_id);
+            ps.setInt(2, state);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Customer customer = new Customer();
-                customer.setId(rs.getInt("id"));
-                customer.setEmail(rs.getString("email"));
-                customer.setPhone_number(rs.getString("phone_number"));
-                customer.setStage(rs.getInt("stage"));
-                Name n = new Name();
-                n.setFirst_name(rs.getString("first_name"));
-                n.setLast_name(rs.getString("last_name"));
-                n.setId(rs.getInt("name_id"));
-                customer.setName(n);
+                Customer c = new Customer();
+                c.setId(rs.getInt("id"));
+                c.setEmail(rs.getString("email"));
+                c.setPhone_number(rs.getString("phone_number"));
+                c.setStage(rs.getInt("stage"));
+                c.setIdentityNumber(rs.getString("identification_number"));
+                NameDAO nDAO = new NameImpl();
+                Name name = nDAO.getName(rs.getInt("name_id"));
+                c.setName(name);
                 LocationDAO locationimp = new LocationImpl();
                 ArrayList<Location> listlocatino = locationimp.getLocationCustomer(rs.getInt("id"));
-                customer.setLocation(listlocatino);
-                listcustomer.add(customer);
+                c.setLocation(listlocatino);
+                listCustomers.add(c);
             }
-            return listcustomer;
-        } catch(SQLException e) {
+            return listCustomers;
+        }catch(SQLException e) {
             e.printStackTrace();
             DBConnect.dbClose();
         }
+        DBConnect.dbClose();
         return null;
     }
 }

@@ -40,7 +40,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">${sessionScope.user}</a><a class="dropdown-item" href="#">Activity Log</a>
+                        <a class="dropdown-item" href="#">${sessionScope.user}</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
                     </div>
@@ -77,15 +77,15 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                     Xuất báo cáo
                             </a>
-                            <a class="nav-link" href="./config.jsp" >
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Cấu hình
+                             <a class="nav-link" href="<c:url value="/config" />" >
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Cấu hình
                             </a> 
                         </div>
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
+            <div id="layoutSidenav_content" style="background-image: url('public/1.jpg');background-repeat: no-repeat; background-size: cover;">
                 <jsp:invoke fragment="content"></jsp:invoke>
             </div>
         </div>

@@ -5,7 +5,7 @@
 <mt:app title="Gửi thông báo">
     <jsp:attribute name="content">
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: white;">
             <div class="table-responsive">
                 <table class="table">
                     <thead class="thead-dark">
@@ -42,13 +42,13 @@
                                     ${location.toString()}
                                 </c:forEach>
                             </td>
-                            <td><a class="btn btn-info" href="<c:url value="/customer/send?id=${customer.getId()}" />">Send email</a></td>
+                            <td><a class="btn btn-info" href="<c:url value="/customer/send?id=${customer.getId()}" />">Gửi email</a></td>
                         </tr>
                         </c:forEach>
                     </tbody>
                 </table>
              </div>
-            <div><a class="btn btn-info" href="<c:url value="/customers/send-all" />">Send All</a></div>
+            <div><a class="btn btn-info" href="<c:url value="/customers/send-all" />">Gửi tất cả</a></div>
         </div>
     </main>
     </jsp:attribute>

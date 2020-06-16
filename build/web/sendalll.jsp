@@ -5,12 +5,12 @@
 <mt:app title="Gửi tất cả">
     <jsp:attribute name="content">
     <main>
-        <div class="container">
+        <div class="container" style="background-color: white;">
             <div class="table-responsive">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <td>Receiver(s): All</td>     
+                            <td>Người nhận: Tất cả</td>     
                         </tr>
                     </thead>
                 </table>
@@ -29,7 +29,7 @@
                             <font color="#F24638" id="content-error"></font>
                         </div>
                         <div>
-                            <input type="submit" class="btn btn-info" value="Send" />
+                            <input type="submit" class="btn btn-info" value="Gửi" />
                         </div>
                     </div>
                 </form>

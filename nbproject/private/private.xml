@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/web/send.jsp</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/src/java/models/PoweMeter.java</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/web/WEB-INF/tags/app.tag</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/web/list.jsp</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/web/home.jsp</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/src/java/models/Tim.java</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/src/java/controllers/ExportReport.java</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/src/java/models/Customer.java</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/web/sendnotification.jsp</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/web/exportreport.jsp</file>
-            <file>file:/C:/Users/CongNguyen/Documents/NetBeansProjects/SQA/src/java/controllers/CustomerPaid.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

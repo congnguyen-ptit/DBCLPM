@@ -12,5 +12,5 @@ import models.Messag;
  * @author CongNguyen
  */
 public interface MessageDAO {
-    public void storeMessage(Messag message);
+    public boolean storeMessage(Messag message);
 }
